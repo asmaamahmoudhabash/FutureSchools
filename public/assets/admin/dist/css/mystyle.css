@@ -1,0 +1,27 @@
+.skin-blue .sidebar a{
+    color: black;
+
+}
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+
+    background-color: ghostwhite;
+}
+.asmaa{
+    color: #4b646f;
+
+}
+
+.pull-left{
+
+    float: right !important;
+}
+.user-panel > .info > p {
+    color: black;
+
+}
+
+.skin-blue .user-panel > .info, .skin-blue .user-panel > .info > a {
+    color: black;
+}
+
+
