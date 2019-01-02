@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
-use Response;
 
 class ContactController extends Controller
 {
@@ -17,6 +16,7 @@ class ContactController extends Controller
     {
         //
         $contacts = Contact::latest()->paginate(20);
+
         return view('admin.contacts.index', compact('contacts'));
     }
 
@@ -33,7 +33,8 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +45,8 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -55,7 +57,8 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -66,8 +69,9 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -78,7 +82,8 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -87,7 +92,8 @@ class ContactController extends Controller
 
         $contacts = Contact::findOrFail($id);
         $contacts->delete();
-        flash()->warning("تم الحذف  بنجاح");
+        flash()->warning('تم الحذف  بنجاح');
+
         return back();
     }
 }

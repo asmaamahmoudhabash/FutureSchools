@@ -15,7 +15,6 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-
     public function news()
     {
         return $this->hasMany('App\Models\News');
@@ -50,6 +49,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Album');
     }
+
     /**
      * The attributes that should be hidden for arrays.
      *

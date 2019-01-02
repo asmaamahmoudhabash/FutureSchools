@@ -29,33 +29,27 @@ Route::post('jobs', 'FrontController@job2');
 
 Route::get('search', 'FrontController@search');
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-
-
-
 // admin routes
-Route::group(['prefix'=> 'admin','middleware'=>'auth'],function(){
-    Route::resource('post','PostController');
-    Route::resource('slider','SliderController');
-    Route::resource('partner','PartnerController');
-    Route::resource('client','ClientController');
-    Route::resource('service','ServiceController');
-    Route::resource('gallery','GalleryController');
-    Route::resource('page','PageController');
-    Route::resource('photo','PhotoController');
-    Route::resource('contactus','ContactController');
-    Route::resource('job','JobController');
+Route::group(['prefix'=> 'admin', 'middleware'=>'auth'], function () {
+    Route::resource('post', 'PostController');
+    Route::resource('slider', 'SliderController');
+    Route::resource('partner', 'PartnerController');
+    Route::resource('client', 'ClientController');
+    Route::resource('service', 'ServiceController');
+    Route::resource('gallery', 'GalleryController');
+    Route::resource('page', 'PageController');
+    Route::resource('photo', 'PhotoController');
+    Route::resource('contactus', 'ContactController');
+    Route::resource('job', 'JobController');
 
-    Route::get('settings','SettingsController@view');
-    Route::post('settings','SettingsController@update');
-
+    Route::get('settings', 'SettingsController@view');
+    Route::post('settings', 'SettingsController@update');
 
     // user reset
-    Route::get('user/change-password','UserController@changePassword');
-    Route::post('user/change-password','UserController@changePasswordSave');
+    Route::get('user/change-password', 'UserController@changePassword');
+    Route::post('user/change-password', 'UserController@changePasswordSave');
 });
-

@@ -11,10 +11,5 @@
 |
 */
 
-
-
-
-
-    Route::get('settings','SettingsController@view');
-    Route::post('settings','SettingsController@update');
-
+    Route::get('settings', 'SettingsController@view');
+    Route::post('settings', 'SettingsController@update');

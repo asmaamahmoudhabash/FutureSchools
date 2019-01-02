@@ -11,9 +11,7 @@
 |
 */
 
-
 use Illuminate\Http\Request;
-
 
 Route::get('/start', function () {
     return View::make('admin.start');
@@ -43,30 +41,24 @@ Route::post('jobs', 'FrontController@job2');
 //page
 Route::get('page/{id}', 'FrontController@page');
 
-
-
 //login
 Route::get('login', function () {
-
     if (Auth::check()) {
         return Redirect::to('/start');
     } else {
         return View::make('admin.users.login');
     }
-
 });
 
-
-Route::post('login', array('before' => 'csrf', function (Request $request) {
-    if (Auth::attempt(array('email' => $request->input('email'), 'password' => $request->input('password'))))  // login_access=1 if i wanna make premissions levels
-    {
+Route::post('login', ['before' => 'csrf', function (Request $request) {
+    if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {  // login_access=1 if i wanna make premissions levels
         return Redirect::to('/start');
     } else {
         Session::set('loginerror', 'بيانات الدخول غير صحيحة');
+
         return View::make('admin.users.login');
     }
-
-}));
+}]);
 
 Route::get('logout', function () {
     Auth::logout();
@@ -74,13 +66,10 @@ Route::get('logout', function () {
     return Redirect::to('login');
 });
 
-
-Route::group(array('prefix' => 'admin', 'middleware' => 'auth'), function () {
-
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', function () {
         return View::make('admin.start');
     });
-
 
     Route::resource('user', 'UserController');
     Route::resource('news', 'NewsController');
@@ -94,5 +83,4 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth'), function () {
     Route::resource('contactus', 'ContactController');
     Route::resource('job', 'JobController');
     Route::resource('page', 'PageController');
-
 });
