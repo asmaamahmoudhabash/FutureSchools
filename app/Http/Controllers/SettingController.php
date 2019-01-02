@@ -16,13 +16,11 @@ class SettingController extends Controller
     {
         //
 
-        if ($model->all()->count() > 0)
-        {
+        if ($model->all()->count() > 0) {
             $model = Setting::find(1);
         }
 
-        return view('admin.settings.edit',compact('model'));
-     
+        return view('admin.settings.edit', compact('model'));
     }
 
     /**
@@ -38,7 +36,8 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -49,7 +48,8 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,41 +60,41 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request)
     {
-        if (Setting::all()->count() > 0)
-        {
+        if (Setting::all()->count() > 0) {
             Setting::find(1)->update($request->all());
-        }else{
+        } else {
             Setting::create($request->all());
         }
 
         flash()->success('تم الحفظ بنجاح');
-        return back();
 
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -11,8 +11,6 @@ use App\Models\Slide;
 use App\User;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
 class DashController extends Controller
 {
     /**
@@ -24,13 +22,14 @@ class DashController extends Controller
     {
         //
         $news = News::latest()->paginate(10);
-        $clients=Client::latest()->paginate(10);
+        $clients = Client::latest()->paginate(10);
         $users = User::latest()->paginate(10);
         $slides = Slide::latest()->paginate(10);
-        $albums=Album::latest()->paginate(10);
+        $albums = Album::latest()->paginate(10);
         $services = Service::latest()->paginate(10);
         $partners = Partner::latest()->paginate(10);
-        return view('admin.dashboard', compact('news','clients','users','slides','albums','services','partners'));
+
+        return view('admin.dashboard', compact('news', 'clients', 'users', 'slides', 'albums', 'services', 'partners'));
     }
 
     /**
@@ -46,7 +45,8 @@ class DashController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -57,7 +57,8 @@ class DashController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,7 +69,8 @@ class DashController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -79,8 +81,9 @@ class DashController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -91,7 +94,8 @@ class DashController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

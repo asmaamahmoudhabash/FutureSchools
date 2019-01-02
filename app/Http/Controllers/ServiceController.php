@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -20,6 +18,7 @@ class ServiceController extends Controller
     {
         //
         $services = Service::latest()->paginate(10);
+
         return view('admin.services.index', compact('services'));
     }
 
@@ -37,38 +36,40 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
         $this->validate($request, [
-            'title' => 'required',
-            'content' => 'required',
+            'title'        => 'required',
+            'content'      => 'required',
             'published_at' => 'required',
-            'image' => 'required',
+            'image'        => 'required',
         ]);
         $services = Auth::user()->services()->create($request->except('image'));
         $services->slug = $services->title;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $name = time() . '' . rand(1111, 99999) . '.' . $image->getClientOriginalExtension();
+            $name = time().''.rand(1111, 99999).'.'.$image->getClientOriginalExtension();
             $img = Image::make($request->file('image'));
-            $img->save('uploads/services/' . $name);
-            $services->image = 'uploads/services/' . $name;
+            $img->save('uploads/services/'.$name);
+            $services->image = 'uploads/services/'.$name;
             $services->save();
-
         }
 
         flash()->success('تم اضافه خدمه بنجاح');
+
         return redirect('admin/service');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -79,21 +80,24 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
         $model = Service::findOrFail($id);
+
         return view('admin.services.edit', compact('model'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -101,8 +105,8 @@ class ServiceController extends Controller
         //
 
         $this->validate($request, [
-            'title' => 'required',
-            'content' => 'required',
+            'title'        => 'required',
+            'content'      => 'required',
             'published_at' => 'required',
 //            'image' => 'required',
 
@@ -113,21 +117,23 @@ class ServiceController extends Controller
         $services->slug = $services->title;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $name = time() . '' . rand(1111, 99999) . '.' . $image->getClientOriginalExtension();
+            $name = time().''.rand(1111, 99999).'.'.$image->getClientOriginalExtension();
             $img = Image::make($request->file('image'));
-            $img->save('uploads/services/' . $name);
-            $services->image = 'uploads/services/' . $name;
+            $img->save('uploads/services/'.$name);
+            $services->image = 'uploads/services/'.$name;
             $services->save();
         }
 
         flash()->success('تم تعديل الخدمه بنجاح ');
+
         return redirect('admin/service');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -135,8 +141,8 @@ class ServiceController extends Controller
         //
         $services = Service::findOrFail($id);
         $services->delete();
-        flash()->warning("تم حذف الخدمه بنجاح");
-        return back();
+        flash()->warning('تم حذف الخدمه بنجاح');
 
+        return back();
     }
 }

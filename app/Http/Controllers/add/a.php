@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
-class SettingController extends Controller
+class a extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +18,7 @@ class SettingController extends Controller
 
         $model = Setting::findOrNew(1);
 
-        return view('admin.settings.edit',compact('model'));
+        return view('admin.settings.edit', compact('model'));
     }
 
     /**
@@ -36,7 +34,8 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +46,8 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,61 +58,60 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request, $id)
     {
         //'Commitments','goals'
 //        return "hatem";
         $this->validate($request, [
-            'facebook' => 'required',
-            'twitter' => 'required',
-            'youtube' => 'required',
-            'instgram' => 'required',
-            'email' => 'required',
-            'fax' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'welcome_title' => 'required',
+            'facebook'        => 'required',
+            'twitter'         => 'required',
+            'youtube'         => 'required',
+            'instgram'        => 'required',
+            'email'           => 'required',
+            'fax'             => 'required',
+            'latitude'        => 'required',
+            'longitude'       => 'required',
+            'welcome_title'   => 'required',
             'welcome_content' => 'required',
-            'video' => 'required',
-            'website_name' => 'required',
+            'video'           => 'required',
+            'website_name'    => 'required',
             //'website_description'=>'required',
             'website_msg' => 'required',
-            'keywords' => 'required',
+            'keywords'    => 'required',
             'Commitments' => 'required',
-            'goals' => 'required',
-
-
+            'goals'       => 'required',
 
         ]);
-
 
         $settings = Setting::findOrFail($id);
         $settings->update($request->all());
         flash()->success('تم تعديل الاعدادات بنجاح ');
+
         return redirect('admin/setting');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
